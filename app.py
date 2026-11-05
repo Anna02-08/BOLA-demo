@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 
 app = Flask(__name__)
 
@@ -32,6 +32,13 @@ def get_current_user():
 
     return TOKENS.get(token)
 
+######################################################
+#########        API ENDPOINTS            ############
+######################################################
+
+@app.route("/")
+def home():
+    return render_template("index.html")
 
 # VULNERABLE ENDPOINT
 @app.route("/vulnerable/documents/<int:doc_id>")
