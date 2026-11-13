@@ -2,12 +2,20 @@
     box-sizing: border-box;
 }
 
-body {
+html, body {
+    width: 100%;
+    height: 100%;
     margin: 0;
+    overflow: hidden;
+}
+
+body {
     background: #0e1522;
     color: #e2e8f0;
     font-family: Arial, sans-serif;
     font-size: 13px;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Top navigation bar */
@@ -52,9 +60,15 @@ body {
 /* Workspace */
 
 .workspace {
+    width: 100%;
     max-width: 1300px;
     margin: 0 auto;
     padding: 22px 24px;
+
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
 }
 
 .workspace-title {
@@ -121,8 +135,12 @@ h1 {
 
 .panels {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: 16px;
+
+    flex: 1;
+    min-height: 0;
+
     margin: 0;
     padding: 0;
     max-width: none;
@@ -134,6 +152,9 @@ h1 {
     border-radius: 8px;
     padding: 18px;
     min-width: 0;
+    min-height: 0;
+
+    overflow-y: auto;
 }
 
 .panel-heading {
@@ -243,14 +264,42 @@ pre {
     background: #0e1522;
     padding: 16px;
     border-radius: 6px;
-    min-height: 220px;
-    max-height: 450px;
-    overflow: auto;
     white-space: pre-wrap;
     overflow-wrap: anywhere;
     color: #86efac;
     font-size: 12px;
     line-height: 1.6;
+}
+
+/* Response panel fills available height */
+
+.panel:has(#response) {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+#response {
+    flex: 1;
+    min-height: 0;
+    height: auto;
+    max-height: none;
+
+    overflow-y: auto;
+    overflow-x: auto;
+
+    margin: 0;
+    padding: 14px;
+
+    background: #0e1522;
+    border-radius: 6px;
+
+    color: #86efac;
+    font-size: 12px;
+    line-height: 1.6;
+
+    scrollbar-width: thin;
+    scrollbar-color: #475569 #0e1522;
 }
 
 /* Responsive */
